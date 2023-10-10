@@ -1,0 +1,32 @@
+// ::ng-deep .p-float-label input:focus ~ label,
+// .p-float-label input.p-filled ~ label,
+// .p-float-label textarea:focus ~ label,
+// .p-float-label textarea.p-filled ~ label,
+// .p-float-label .p-inputwrapper-focus ~ label,
+// .p-float-label .p-inputwrapper-filled ~ label {
+//     top: 0.25rem;
+//     background: white none repeat scroll 0 0;
+//     display: inline-block;
+//     padding-left: 0.25rem;
+//     padding-right: 0.25rem;
+// }
+
+.p-field > * {
+    display: block;
+}
+
+::ng-deep .p-float-label input:focus~label, .p-float-label input.p-filled~label, .p-float-label textarea:focus~label, .p-float-label textarea.p-filled~label, .p-float-label .p-inputwrapper-focus~label, .p-float-label .p-inputwrapper-filled~label {
+    top: -0.5rem !important;
+    background-color: #fff;
+    padding: 2px 4px;
+    margin-left: -4px;
+    margin-top: 0;
+}
+
+.label-gray{
+    color: rgb(163, 163, 163);
+}
+
+.none-bl {
+    border: none;
+}

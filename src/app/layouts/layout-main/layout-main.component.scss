@@ -1,0 +1,13 @@
+@import "/src/styles/variables";
+
+.sidenav-container {
+  position: relative;
+  z-index: 1;
+  display: block;
+  height: 100vh;
+  overflow: auto;
+}
+
+.lotuss-font {
+  background-color: map-get($green, 600),
+}

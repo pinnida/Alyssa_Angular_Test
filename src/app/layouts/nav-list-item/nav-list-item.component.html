@@ -1,0 +1,11 @@
+<a (click)="handleSubMenuClick($event)" class="nav-link" [class.active]="item?.active ||item?.isOpen"
+  [id]="item?.title + ' tab'" aria-selected="true">
+  <div class="d-inline-flex align-items-center">
+    <img [src]="item?.iconPath" alt="iconPath" width="18" height="18" class="mb-1" />
+    <p class="ml-1">{{ item?.title }}</p>
+    <div class="ml-2" *ngIf="item?.children && item?.children?.length" [class.nav-item-chevron-bottom]="!item?.isOpen"
+      [class.nav-item-chevron-top]="item?.isOpen"></div>
+  </div>
+  <app-nav-sub-list *ngIf="item?.children && item?.children?.length && item?.isOpen" [items]="item?.children">
+  </app-nav-sub-list>
+</a>

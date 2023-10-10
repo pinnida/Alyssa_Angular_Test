@@ -1,0 +1,101 @@
+//lotuss color
+$black: #000000;
+$white: #ffffff;
+
+$gray: (
+  25: #f3f3f3,
+  50: #ededed,
+  75: #e8e8e8,
+  100: #e0e0e0,
+  150: #cccccc,
+  250: #b8b8b8,
+  300: #a3a3a3,
+  400: #919191,
+  500: #7d7d7d,
+  550: #6b6b6b,
+  650: #575757,
+  700: #424242,
+  800: #303030,
+  850: #292929,
+  900: #1c1c1c,
+);
+
+$green: (
+  10: #edfcfc,
+  100: #cef3f1,
+  200: #b0eae7,
+  300: #7ddeda,
+  400: #4fd3cd,
+  500: #25c7c0,
+  600: #00bcb4,
+  700: #0d9b94,
+  800: #147975,
+  900: #113331,
+  A100: #c2fffa,
+  A200: #8ffff6,
+  A400: #5cfff2,
+  A700: #42fff0,
+);
+
+$yellow: (
+  10: #fcf8eb,
+  100: #fcf2d3,
+  200: #fcedbb,
+  300: #fbe18c,
+  400: #fad55d,
+  500: #faca2e,
+  600: #f9be00,
+  700: #cfa210,
+  800: #a5851a,
+  900: #524419,
+);
+
+$red: (
+  10: #fff3f2,
+  100: #fedfde,
+  200: #fcccca,
+  300: #f69e9b,
+  400: #ef736f,
+  500: #e84944,
+  600: #e1221c,
+  700: #b52520,
+  800: #8a2320,
+  900: #331211,
+);
+
+$blue: (
+  10: #edf4ff,
+  100: #ceddf6,
+  200: #b0c6ed,
+  300: #7a9ddb,
+  400: #4b79c9,
+  500: #2258b7,
+  600: #003ca5,
+  700: #0f3c8b,
+  800: #183871,
+  900: #1a273d,
+);
+
+// shadow
+$shadow-color: #0431801a;
+$shadow-color2: #f78b8333;
+$shadow-color3: #00000040;
+$shadow-color4: #e5ebf77e;
+
+$page-max-width: calc(100vw - 80px);
+$page-width: calc(100vw - 230px);
+$page-min-width: calc(1024px - 230px);
+$page-header-height: 55px;
+$page-sidebar-width: 230px;
+$vertical-table-margin: 20px;
+
+$z-index-modal: 15;
+$z-index-overlay: 14;
+$z-index-sidebar: 13;
+$z-index-tooltip: 12;
+$z-index-page-header: 11;
+$z-index-page-body: 10;
+
+$primary-text: map-get($gray, 700);
+$secondary-text: map-get($gray, 550);
+$inactive-text: map-get($gray, 500);

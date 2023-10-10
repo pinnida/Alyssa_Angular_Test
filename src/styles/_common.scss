@@ -1,0 +1,243 @@
+@import "variables";
+
+html,
+body {
+  zoom: 95%;
+  height: 100%;
+  overflow: hidden;
+  font-family: "LotussSmartTX", sans-serif;
+}
+app-root {
+  display: block;
+  height: 100%;
+}
+
+h1 {
+  font-size: 24px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+a {
+  margin: 0 !important;
+  color: #424242;
+}
+
+.content {
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  margin-top: 30px;
+  min-height: 500px;
+}
+
+.primary-text {
+  color: $primary-text;
+}
+.secondary-text {
+  color: $secondary-text;
+}
+.inactive-text {
+  color: $inactive-text;
+}
+
+//table
+table {
+//   width: 100%;
+//   box-shadow: none;
+  border-collapse: collapse;
+  border-radius: 15px;
+  border: 1px solid rgb(0, 0, 0, 0.12);
+}
+
+tr th:first-child {
+  border-top-left-radius: 15px;
+}
+tr th:last-child {
+  border-top-right-radius: 15px;
+}
+
+table tr:last-child td /*To remove the last border*/ {
+  border-bottom: 0 solid;
+}
+
+tr.mat-header-row {
+  height: 48px;
+}
+tr.mat-row {
+  height: 64px;
+}
+
+//button
+//Button
+.button {
+  min-width: 120px;
+  height: 32px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 20px;
+  line-height: 0;
+  outline: none;
+
+  &:hover:not([disabled]) {
+    opacity: 0.8;
+  }
+
+  &-primary {
+    color: $white;
+    border: none;
+    background: map-get($green, 600);
+  }
+  &-secondary {
+    color: map-get($gray, 700);
+    border: none;
+    background: map-get($gray, 75);
+  }
+
+  &-red {
+    color: $white;
+    border: none;
+    background: map-get($red, 600);
+  }
+
+  &-outline {
+    background: transparent;
+
+    &-red {
+      color: map-get($red, 600);
+      border-color: map-get($red, 600);
+      border: 1px solid map-get($red, 600);
+      background: $white;
+    }
+    &-primary {
+      color: map-get($green, 600);
+      border-color: map-get($green, 600);
+      border: 1px solid map-get($green, 600);
+      background: $white;
+    }
+  }
+
+  &-link {
+    background: transparent;
+    &-primary {
+      border: none;
+      background: transparent;
+      color: map-get($green, 600);
+    }
+  }
+
+  &-disabled,
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
+.dialog {
+  &-title {
+    color: map-get($gray, 700);
+  }
+  &-content {
+    word-wrap: break-word;
+    white-space: pre-line;
+    color: map-get($gray, 550);
+    font-weight: 400;
+    font-size: 20px;
+  }
+}
+
+.chevron-right {
+  background: url(../assets/svg/chevron-right.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 4px 14px;
+  width: 14px;
+  height: 14px;
+  filter: invert(20%) sepia(0%) saturate(1216%) hue-rotate(147deg)
+    brightness(130%) contrast(99%);
+}
+
+.plus-icon {
+  display: inline-block;
+  background: url(../assets/svg/plus-icon.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 4px 14px;
+  width: 14 px;
+  height: 40px;
+  filter: invert(20%) sepia(0%) saturate(1216%) hue-rotate(147deg)
+    brightness(130%) contrast(99%);
+}
+
+.search-icon {
+  background: left center / contain url("../assets/svg/SearchIcon.svg")
+    no-repeat;
+  width: 28px;
+  height: 18px;
+  filter: invert(25%) sepia(4%) saturate(5%) hue-rotate(319deg) brightness(95%)
+    contrast(92%);
+  display: inline-block;
+  margin-bottom: 4px;
+  margin-left: 4px;
+}
+
+.time-picker-icon {
+  background: center / contain url("../assets/svg/time-picker-icon.svg")
+    no-repeat;
+  width: 24px;
+  height: 24px;
+}
+
+.sub-header {
+  color: map-get($gray, 550);
+}
+
+.date-picker-icon {
+  background: center / contain url("../assets/svg/date-picker-icon.svg")
+  no-repeat;
+  width: 24px;
+  height: 24px;
+}
+
+.close-icon {
+  background: url("../assets/svg/close-icon.svg") no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  height: 36px;
+  width: 36px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.bin-icon {
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+  background: url("../assets/svg/bin-icon.svg") no-repeat;
+  background-size: contain;
+}
+
+.download-file-button-menu {
+  max-width: 160px !important;
+  width: 160px !important;
+  margin-right: 50px;
+}
+
+.sidenav-container .mat-drawer-inner-container,
+.sidenav-container .mat-sidenav,
+.sidenav-container app-side-nav-bar {
+  overflow-x: hidden !important;
+}

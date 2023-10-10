@@ -1,0 +1,40 @@
+{ "data": [
+    {
+    "_id": "PLU_20220610.csv",
+    "country_code": "TH",
+    "path": "/LABEL/OUT/INT_BUY_68946_Item/PLU_20220610.csv",
+    "file_type": "PLU",
+    "discovered_time": new Date("2022-11-24T17:26:17.955Z"),
+    "end_time": new Date("2022-11-24T17:29:57.865Z"),
+    "status": "ERROR",
+    "total_record": 394483,
+    "total_success": 374306,
+    "total_error": 20177
+  },
+  {
+    "_id": "PLU_20220610.csv",
+    "country_code": "TH",
+    "path": "/LABEL/OUT/INT_BUY_68946_Item/PLU_20220610.csv",
+    "file_type": "PLU",
+    "discovered_time": new Date("2022-11-24T17:26:17.955Z"),
+    "end_time": new Date("2022-11-24T17:29:57.865Z"),
+    "status": "ERROR",
+    "total_record": 394483,
+    "total_success": 374306,
+    "total_error": 20177
+  },
+  {
+    "_id": "PLU_20220610.csv",
+    "country_code": "TH",
+    "path": "/LABEL/OUT/INT_BUY_68946_Item/PLU_20220610.csv",
+    "file_type": "PLU",
+    "discovered_time": new Date("2022-11-24T17:26:17.955Z"),
+    "end_time": new Date("2022-11-24T17:29:57.865Z"),
+    "status": "ERROR",
+    "total_record": 394483,
+    "total_success": 374306,
+    "total_error": 20177
+  }
+]
+
+}

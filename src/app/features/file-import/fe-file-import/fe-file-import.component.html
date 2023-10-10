@@ -1,0 +1,66 @@
+<lib-spinner *ngIf="showLoading" [showLoading]="showLoading"></lib-spinner>
+<div class="row mb-3">
+  <div class="col">
+    <h1 class="mb-0">File Import</h1>
+    <h3 style="color: #6b6b6b;">File Import</h3>
+  </div>
+</div>
+
+<form novalidate #form="ngForm">
+
+  <div class="content">
+
+    <div class="row">
+      <div class="col-6">
+        <form class="form-floating">
+          <input pInputText type="text" class="form-control" id="search" value=""/>
+          <label for="search" class="label-gray"><i class="bi bi-search"></i> Search </label>
+          <!-- <small class="ms-2 text-muted fw-light">
+            seperated by comma
+          </small> -->
+        </form>
+      </div>
+      <div class="col-6 d-flex align-items-center">
+        <p-button icon="pi pi-bell" styleClass="p-button-rounded p-button-primary">
+          <i class="bi bi-search text-warning fw-bolder"></i>
+        </p-button>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-12">
+        <p-table [columns]="cols" [value]="products" styleClass="p-datatable-gridlines" [tableStyle]="{ 'min-width': '50rem' }">
+          <ng-template pTemplate="header" let-columns>
+              <tr>
+                  <th *ngFor="let col of columns">
+                      {{ col.header }}
+                  </th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-columns="columns">
+              <tr>
+                  <td *ngFor="let col of columns">
+                      {{ rowData[col.field] }}
+                  </td>
+              </tr>
+          </ng-template>
+      </p-table>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!-- <span class="p-float-label">
+  <input pInputText id="username" [(ngModel)]="value" placeholder="username"/>
+  <label htmlFor="username">Username</label>
+</span>
+
+<span class="p-float-label">
+  <p-dropdown [options]="cities" [(ngModel)]="selectedCity" placeholder="Select a City" optionLabel="name" inputId="float-label"></p-dropdown>
+  <label for="float-label">Select a City</label>
+</span>
+
+<form class="form-floating">
+  <input pInputText type="email" class="form-control" id="floatingInputValue" placeholder="name@example.com" value="test@example.com">
+  <label for="floatingInputValue">Input with value</label>
+</form> -->

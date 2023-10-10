@@ -1,0 +1,10 @@
+<div class="nav-body">
+  <img src="assets/img/logo-svg.png" alt="Lotus Logo">
+  <p class="inactive-text" style="font-size: 90%; margin-top: 5px !important; display: inline-block;">Master Data Admin</p>
+  <div class="nav flex-column nav-pills w-100 mt-4" id="side-bar" role="tablist" aria-orientation="vertical">
+    <ng-container *ngFor="let route of routes">
+      <app-nav-list-item class="mb-3" [item]="route"></app-nav-list-item>
+    </ng-container>
+  </div>
+  <!-- <app-version></app-version> -->
+</div>

@@ -1,0 +1,35 @@
+@import "/src/styles/variables";
+
+
+// .nav-item{
+//     &-chevron{
+//         &-top{
+//             background: no-repeat url('../../../../assets/svg/chevron-top.svg');
+//             width: 8.5px;
+//             height: 5.31px;
+//         }
+//         &-bottom{
+//             background: no-repeat url('../../../../assets/svg/chevron-bottom.svg');
+//             width: 8.5px;
+//             height: 5.31px;
+//         }
+//     }
+// }
+
+.nav-link{
+    display: inline-block;
+    width: 100%;
+    color:map-get($gray ,700 );
+    cursor: pointer;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.nav-link.active{
+    background-color: map-get($gray, 75 );
+}
+
+.nav-link:hover{
+    background-color: map-get($gray, 75 );
+}

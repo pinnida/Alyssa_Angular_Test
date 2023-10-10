@@ -1,0 +1,32 @@
+@import "_custom.scss"; // custom bootstrap
+@import "_fonts.scss";
+@import "_variables";
+@import "_common.scss";
+
+* {
+    font-family: "LotussSmartTX", sans-serif !important;
+}
+
+.p-datatable-wrapper{
+    border-collapse: collapse;
+    border-radius: 15px;
+    border: 1px solid rgb(0, 0, 0, 0.12);
+}
+
+// .p-datatable {
+//     &.p-datatable-gridlines {
+//       .p-datatable-header {
+//         border: none;
+//       }
+//       .p-datatable-thead > tr > th {
+//         // justify-content: center;   // ให้ header ตารางอยู่ตรงกลาง
+//         vertical-align: top !important; // ให้ header อยู่บน
+//         text-align: center; // ให้ header ตารางอยู่ตรงกลาง
+//         white-space: pre-line; //break-spaces; // ให้ /n(
+//       }
+//       .p-paginator-bottom {
+//         background-color: #f8f9fa;
+//         border: none;
+//       }
+//     }
+//   }
