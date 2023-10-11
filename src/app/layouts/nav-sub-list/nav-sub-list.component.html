@@ -1,8 +1,0 @@
-<div class="nav flex-column nav-pills w-100 mt-2" id="sub-nav-item">
-  <a *ngFor="let item of items" class="nav-link mt-2" [class.active]="item.active" [id]="item?.title + ' sub_tab'"
-    aria-selected="true" [routerLink]="item?.link">
-    <div class="d-inline-flex align-items-center">
-      <p >{{ item?.title }}</p>
-    </div>
-  </a>
-</div>

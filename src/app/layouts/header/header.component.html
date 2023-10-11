@@ -1,7 +1,29 @@
 <div class="header-container">
-  <div class="row">
-    <div class="col-12">
-      <button type="button" class="btn btn-outline-secondary" (click)="logout()">Logout</button>
+  <div class="row align-items-center">
+    <div class="col-6 text-start">
+      <p class="inactive-text" style="font-size: 90%; margin-top: 5px !important; display: inline-block;">
+        Alyssa AngularTest Web
+      </p>
+    </div>
+    <div class="col-6 text-end">
+      <ng-container *ngIf="user$ | async as user;">
+        <button mat-button [matMenuTriggerFor]="userMenu">
+          <i class="bi bi-person-circle"></i>
+          สวัสดี {{ user.email }}
+          <i class="bi bi-chevron-down"></i>
+        </button>
+      </ng-container>
     </div>
   </div>
 </div>
+
+<mat-menu #userMenu="matMenu">
+  <button mat-menu-item *ngIf="user$ | async as user;">
+    <i class="bi bi-envelope"></i>
+    Email: {{ user.email }}
+  </button>
+  <button mat-menu-item (click)="logout()">
+    <i class="bi bi-box-arrow-right"></i>
+    Logout
+  </button>
+</mat-menu>

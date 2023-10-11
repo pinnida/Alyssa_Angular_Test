@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+// services
 import { AuthenticationService } from 'src/shared/services/authentication.service';
 
 @Component({
@@ -8,10 +9,10 @@ import { AuthenticationService } from 'src/shared/services/authentication.servic
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  // user$ = this.usersService.currentUserProfile$;
+  user$ = this.authenticationSVC.currentUser$;
 
   constructor(
-    private authSVC: AuthenticationService,
+    private authenticationSVC: AuthenticationService,
     // public usersService: UsersService,
     private router: Router
   ) { }
@@ -21,7 +22,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.authSVC.logout().subscribe(() => {
+    this.authenticationSVC.logout().subscribe(() => {
       this.router.navigate(['/auth/login']);
     });
   }
