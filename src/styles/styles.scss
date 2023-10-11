@@ -1,17 +1,17 @@
 @import "_custom.scss"; // custom bootstrap
 @import "_fonts.scss";
-@import "_variables";
-@import "_common.scss";
+// @import "_variables";
+// @import "_common.scss";
 
 * {
     font-family: "Kanit-Regular", sans-serif !important;
 }
 
-.p-datatable-wrapper{
-    border-collapse: collapse;
-    border-radius: 15px;
-    border: 1px solid rgb(0, 0, 0, 0.12);
-}
+// .p-datatable-wrapper{
+//     border-collapse: collapse;
+//     border-radius: 15px;
+//     border: 1px solid rgb(0, 0, 0, 0.12);
+// }
 
 // .p-datatable {
 //     &.p-datatable-gridlines {
