@@ -12,6 +12,9 @@ import { AppComponent } from './app.component';
 
 // modules
 import { LayoutsModule } from './layouts/layouts.module';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,9 @@ import { LayoutsModule } from './layouts/layouts.module';
     AppRoutingModule,
     LayoutsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
   ],
   providers: [],
   bootstrap: [AppComponent]

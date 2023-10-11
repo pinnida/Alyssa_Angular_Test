@@ -22,7 +22,7 @@ import { SpinnerModule } from './spinner/spinner.module';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 
 
-// mockupservices
+// mockup services
 import { MockService } from './services/mock.service';
 import { Mock2Service } from './services/mock2.service';
 /////////////////////////////
