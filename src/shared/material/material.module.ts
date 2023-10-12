@@ -12,6 +12,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
 
 const materialModules = [
   MatInputModule,
@@ -25,6 +27,8 @@ const materialModules = [
   MatChipsModule,
   MatSelectModule,
   MatSortModule,
+  MatDatepickerModule,
+  MatNativeDateModule
   // MatSort,
   // MatSortModule
 ];

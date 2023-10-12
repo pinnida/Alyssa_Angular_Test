@@ -8,3 +8,16 @@
   th.mat-sort-header-sorted {
     color: black;
   }
+
+  .form-container {
+    // display: block;
+    // max-width: 500px;
+    // margin: auto;
+    // background: #eceff1;
+    // padding: 48px;
+    // border-radius: 16px;
+
+    mat-form-field {
+        width: 100%;
+    }
+}

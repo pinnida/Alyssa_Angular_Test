@@ -1,15 +1,86 @@
-<div class="demo-button-container">
-    <button mat-raised-button (click)="addTodo()" color="primary" class="btn btn-lg p-3">
-        <i class="bi bi-plus-circle"></i>
-        Create Task
-    </button>
-    <!-- <button
-        mat-raised-button
-        [disabled]="!dataToDisplay.length"
-        (click)="removeData()"
-        class="demo-button">
-      Remove data
-    </button> -->
+<lib-spinner *ngIf="showLoading" [showLoading]="showLoading"></lib-spinner>
+
+<div class="row">
+    <div class="col-12 py-2">
+        <form [formGroup]="myFormFilter" class="form-container" (ngSubmit)="onSearch(myFormFilter)">
+
+
+            <div class="p-3 text-secondary-emphasis bg-white border border-secondary-subtle rounded-3">
+                <div class="row mb-2">
+                    <h3>Filter</h3>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Select Priority</mat-label>
+                            <mat-select placeholder="Priority" formControlName="priority">
+                                <mat-option *ngFor="let priority of PriorityOptions" [value]="priority.value">
+                                    {{ priority.text }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Select Category</mat-label>
+                            <mat-select placeholder="Category" formControlName="category">
+                                <mat-option *ngFor="let category of CategoryOptions" [value]="category.value">
+                                    <i class="{{ category.icon }}"></i>
+                                    {{ category.text }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Select Status</mat-label>
+                            <mat-select placeholder="Status" formControlName="status">
+                                <mat-option *ngFor="let status of StatusOptions" [value]="status.value">
+                                    {{ status.text }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Enter a date range</mat-label>
+                            <mat-date-range-input [rangePicker]="picker">
+                                <input matStartDate formControlName="startDate" placeholder="Start date">
+                                <input matEndDate formControlName="endDate" placeholder="End date">
+                            </mat-date-range-input>
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-date-range-picker #picker></mat-date-range-picker>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-2">
+                        <button type="submit" mat-raised-button class="btn btn-lg p-3"
+                            style="width: 100%; height: auto" color="primary">
+                            <i class="bi bi-search"></i>
+                            Search
+                        </button>
+                    </div>
+                    <div class="col-2">
+                        <button type="button" mat-raised-button class="btn btn-lg p-3"
+                            style="width: 100%; height: auto" (click)="onClear()">
+                            <i class="bi bi-x-lg"></i>
+                            Clear
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-2">
+        <button mat-raised-button (click)="addTodo()" color="primary" class="btn btn-lg p-3">
+            <i class="bi bi-plus-circle"></i>
+            Create Task
+        </button>
+    </div>
 </div>
 
 
@@ -79,7 +150,6 @@
                         </span>
                     </td>
                 </ng-container>
-
 
                 <!-- No Data Row -->
                 <tr class="mat-row text-center hover-white" *matNoDataRow>
@@ -281,12 +351,9 @@
             Confirm Delete
         </p>
     </ng-template>
-    <v-confirm-delete *ngIf="displayDialogDel"
-    [rowDataSelected]="rowDataSelected"
-    [indexSelected]="indexSelected"
-    [tableSelected]="tableSelected"
-    (delConfirm)="onDelConfirm($event)"
-    (delCancel)="onDelCancel($event)"></v-confirm-delete>
+    <v-confirm-delete *ngIf="displayDialogDel" [rowDataSelected]="rowDataSelected" [indexSelected]="indexSelected"
+        [tableSelected]="tableSelected" (delConfirm)="onDelConfirm($event)"
+        (delCancel)="onDelCancel($event)"></v-confirm-delete>
 </p-dialog>
 
 <!-- <pre>{{ this.dataSourceTodo | json }}</pre>
