@@ -13,7 +13,7 @@ import { LayoutMainComponent } from './layouts/layout-main/layout-main.component
 
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['/auth/login']);
-const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
+const redirectLoggedInToHome = () => redirectLoggedInTo(['dashboard']);
 
 const routes: Routes = [
   {
@@ -28,17 +28,12 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'home',
+        redirectTo: 'dashboard',
         pathMatch: 'full',
       },
       {
-        path: 'home',
+        path: 'dashboard',
         loadChildren: () => import('./pages/home-page/home-page.module').then(m => m.HomePageModule),
-        ...canActivate(redirectUnauthorizedToLogin),
-      },
-      {
-        path: 'file-import',
-        loadChildren: () => import('./pages/file-import-page/file-import-page.module').then(m => m.FileImportPageModule),
         ...canActivate(redirectUnauthorizedToLogin),
       },
     ]

@@ -3,7 +3,7 @@
 @import "variables";
 
 $theme-colors: (
-  "primary":    map-get($green, 600),
+  "primary":    $primary,//map-get($green, 600),
   "secondary":  $secondary,
   "success":    $success,
   "info":       $info,
