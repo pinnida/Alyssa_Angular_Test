@@ -259,9 +259,9 @@
 
 
 
-<!--- Dialog --->
+<!--- Dialog Task--->
 <p-dialog [(visible)]="displayDialogAddTodo" [modal]="true" [autoZIndex]="true" [draggable]="false"
-    [style]="{'width': '80vw'}" [contentStyle]="{'overflow':'auto'}" [closable]="true">
+    [style]="{'width': '50vw'}" [contentStyle]="{'overflow':'auto'}" [closable]="true">
     <ng-template pTemplate="header">
         <p class="text-header-dialog">
             {{ mode }} Task
@@ -270,6 +270,23 @@
     <v-task-work *ngIf="displayDialogAddTodo" [mode]="mode" [rowDataSelected]="rowDataSelected"
         [indexSelected]="indexSelected" [previousStatus]="previousStatus" (confirmAdd)="confirmAdd($event)"
         (confirmUpdate)="onConfirmUpdate($event)" (confirmCancel)="onConfirmCancel($event)"></v-task-work>
+</p-dialog>
+
+
+<!--- Dialog Delete--->
+<p-dialog [(visible)]="displayDialogDel" [modal]="true" [autoZIndex]="true" [draggable]="false"
+    [style]="{'width': '50vw'}" [contentStyle]="{'overflow':'auto'}" [closable]="true">
+    <ng-template pTemplate="header">
+        <p class="text-header-dialog">
+            Confirm Delete
+        </p>
+    </ng-template>
+    <v-confirm-delete *ngIf="displayDialogDel"
+    [rowDataSelected]="rowDataSelected"
+    [indexSelected]="indexSelected"
+    [tableSelected]="tableSelected"
+    (delConfirm)="onDelConfirm($event)"
+    (delCancel)="onDelCancel($event)"></v-confirm-delete>
 </p-dialog>
 
 <!-- <pre>{{ this.dataSourceTodo | json }}</pre>

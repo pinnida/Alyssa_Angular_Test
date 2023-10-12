@@ -39,6 +39,7 @@ const ELEMENT_DATA_2: IInput[] = [
 export class FeHomeComponent {
   [key: string]: any; // add this line to add an index signature
   displayDialogAddTodo: boolean = false;
+  displayDialogDel: boolean = false;
   user$ = this.authenticationSVC.currentUser$;
   displayedColumns: string[] = ['title', 'description', 'priority', 'category', 'status', 'createDate', 'action'];
 
@@ -49,7 +50,8 @@ export class FeHomeComponent {
   mode: string = 'Create';
   indexSelected!: number | null;
   rowDataSelected!: IInput | null;
-  previousStatus!: string| null;
+  previousStatus!: string | null;
+  tableSelected!: any | null;
 
   columns = [
     { field: 'title', header: 'Title' },
@@ -120,14 +122,7 @@ export class FeHomeComponent {
     this.displayDialogAddTodo = true;
   }
 
-  onDel(rowDataSelected: IInput, indexSelected: number, tableName: string) {
-    const arrayData = `dataSource${tableName}` as any;
-
-    let _clone = [...this[arrayData]];
-    this[arrayData] = _clone.filter((item: any, i: number) => { return i !== indexSelected });
-  }
-
-  sortTB(e: any,tableName: string) {
+  sortTB(e: any, tableName: string) {
     const arrayData = `dataSource${tableName}` as any;
     const direction = e.direction;
     const active = e.active.toLowerCase();
@@ -137,7 +132,32 @@ export class FeHomeComponent {
     }
 
     this[arrayData] = _.orderBy(this[arrayData], [active], [direction]);
+  }
 
+
+  onDel(rowDataSelected: IInput, indexSelected: number, tableName: string) {
+    this.tableSelected = `dataSource${tableName}` as any;
+    this.rowDataSelected = rowDataSelected;
+    this.indexSelected = indexSelected || 0;
+    this.displayDialogDel = true;
+  }
+
+
+  onDelConfirm(e: any) {
+    const arrayData = e.tableSelected;
+    const indexSelected = e.indexSelected;
+    const tableSelected = e.tableSelected;
+
+    let _clone = [...this[arrayData]];
+    this[tableSelected] = _clone.filter((item: any, i: number) => { return i !== indexSelected });
+    this.displayDialogDel = false;
+  }
+
+  onDelCancel(e: any) {
+    this.tableSelected = null;
+    this.rowDataSelected = null;
+    this.indexSelected = null;
+    this.displayDialogDel = false;
   }
 
 }

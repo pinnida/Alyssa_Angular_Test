@@ -8,16 +8,18 @@ import { SharedModule } from 'src/shared/shared.module';
 // component
 import { FeHomeComponent } from './fe-home/fe-home.component';
 import { VTaskWorkComponent } from './v-task-work/v-task-work.component';
+import { VConfirmDeleteComponent } from './v-confirm-delete/v-confirm-delete.component';
 
 const features = [
   FeHomeComponent,
-  VTaskWorkComponent
+  VTaskWorkComponent,
+  VConfirmDeleteComponent
 ];
 
 
 @NgModule({
   declarations: [
-    ...features
+    ...features,
   ],
   imports: [
     CommonModule,
