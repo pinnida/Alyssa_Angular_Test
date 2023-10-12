@@ -15,6 +15,7 @@ import { LayoutsModule } from './layouts/layouts.module';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
+import { CurrencyPipe, DatePipe, DecimalPipe, PercentPipe, SlicePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,13 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
   ],
-  providers: [],
+  providers: [
+    SlicePipe,
+    DatePipe,
+    PercentPipe,
+    DecimalPipe,
+    CurrencyPipe,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -17,7 +17,7 @@ export class FeAuthComponent {
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
-  });;
+  });
 
   constructor(
     private authenticationSVC: AuthenticationService,
@@ -47,8 +47,7 @@ export class FeAuthComponent {
         this.router.navigate(['/home']);
       },
       error: err => {
-        console.log()
-        const inpTitle = 'แจ้งเตือน';
+        const inpTitle = 'Error';
         const inpText = '';
         const inpHtml = err.message;
         this.swalSVC.errorSVC(inpTitle, inpText, inpHtml);

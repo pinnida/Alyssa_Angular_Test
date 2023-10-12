@@ -1,0 +1,71 @@
+<div class="form-container">
+    <div class="row">
+        <div class="col-12">
+            <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+                <mat-form-field appearance="outline" class="py-2">
+                    <mat-label>Title</mat-label>
+                    <input matInput placeholder="Title" formControlName="title" [readonly]="mode === 'Edit'" />
+                    <mat-error *ngIf="title?.errors?.['required']">
+                        title is required
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="py-2">
+                    <mat-label>Description</mat-label>
+                    <input matInput placeholder="Description" formControlName="description" />
+                    <mat-error *ngIf="description?.errors?.['required']">
+                        Description is required
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="py-2">
+                    <mat-label>Select Priority</mat-label>
+                    <mat-select placeholder="Priority" formControlName="priority">
+                        <mat-option *ngFor="let priority of PriorityOptions" [value]="priority.value">
+                            {{ priority.text }}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="priority?.errors?.['required']">
+                        Priority is required
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="py-2">
+                    <mat-label>Select Category</mat-label>
+                    <mat-select placeholder="Category" formControlName="category">
+                        <mat-option *ngFor="let category of CategoryOptions" [value]="category.value">
+                            <i class="{{ category.icon }}"></i>
+                            {{ category.text }}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="category?.errors?.['required']">
+                        Category is required
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="py-2">
+                    <mat-label>Select Status</mat-label>
+                    <mat-select placeholder="Status" formControlName="status">
+                        <mat-option *ngFor="let status of StatusOptions" [value]="status.value"
+                            [disabled]="!rowDataSelected">
+                            {{ status.text }}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint align="start" *ngIf="mode === 'Create'">
+                        <strong>Create mode allows select the "Todo" only</strong>
+                     </mat-hint>
+                    <mat-error *ngIf="status?.errors?.['required']">
+                        Status is required
+                    </mat-error>
+                </mat-form-field>
+                <div class="center margin-top">
+                    <button type="submit" mat-raised-button color="primary" class="me-2"
+                        [disabled]="myForm.invalid">Submit</button>
+                    <button type="button" mat-raised-button color="warn" class="me-2" (click)="onCancel()">
+                        Cancel
+                    </button>
+                </div>
+
+                <!-- <pre>{{ myForm.value | json }}</pre> -->
+            </form>
+        </div>
+    </div>
+
+
+</div>
