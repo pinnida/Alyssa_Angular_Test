@@ -75,7 +75,7 @@
 </div>
 
 <div class="row">
-    <div class="col-6 col-lg-2">
+    <div class="col-12 col-md-12 col-lg-6">
         <button mat-raised-button (click)="addTodo()" color="primary" class="btn btn-lg p-3 my-sm-3 my-md-3 my-lg-3">
             <i class="bi bi-plus-circle"></i>
             Create Task
@@ -331,7 +331,7 @@
 
 <!--- Dialog Task--->
 <p-dialog [(visible)]="displayDialogAddTodo" [modal]="true" [autoZIndex]="true" [draggable]="false"
-    [style]="{'width': '50vw'}" [contentStyle]="{'overflow':'auto'}" [closable]="true">
+    [style]="{'width': '100vw'}" [contentStyle]="{'overflow':'auto'}" [closable]="true">
     <ng-template pTemplate="header">
         <p class="text-header-dialog">
             {{ mode }} Task
@@ -345,7 +345,7 @@
 
 <!--- Dialog Delete--->
 <p-dialog [(visible)]="displayDialogDel" [modal]="true" [autoZIndex]="true" [draggable]="false"
-    [style]="{'width': '50vw'}" [contentStyle]="{'overflow':'auto'}" [closable]="true">
+    [style]="{'width': '100vw'}" [contentStyle]="{'overflow':'auto'}" [closable]="true">
     <ng-template pTemplate="header">
         <p class="text-header-dialog">
             Confirm Delete
