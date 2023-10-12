@@ -6,6 +6,7 @@ import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/shared/services/authentication.service';
 import { Auth } from '@angular/fire/auth';
 import { SwalService } from 'src/shared/services/swal.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'fe-auth',
@@ -13,6 +14,7 @@ import { SwalService } from 'src/shared/services/swal.service';
   styleUrls: ['./fe-auth.component.scss']
 })
 export class FeAuthComponent {
+  showLoading: boolean = false;
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -36,15 +38,21 @@ export class FeAuthComponent {
 
 
   submit() {
+    this.showLoading = true;
     const { email, password } = this.loginForm.value;
 
     if (!this.loginForm.valid || !email || !password) {
       return;
     }
 
-    this.authenticationSVC.login(email, password).subscribe({
+    this.authenticationSVC.login(email, password)
+    .pipe(
+      finalize(() => {
+        this.showLoading = false;
+      }))
+    .subscribe({
       next: resp => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/dashboard']);
       },
       error: err => {
         const inpTitle = 'Error';

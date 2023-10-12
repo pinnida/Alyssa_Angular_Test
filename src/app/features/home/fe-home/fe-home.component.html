@@ -55,15 +55,15 @@
                         </mat-form-field>
                     </div>
                     <div class="col-6 col-lg-2">
-                        <button type="submit" mat-raised-button class="btn btn-lg p-3"
-                            style="width: 100%; height: auto" color="primary">
+                        <button type="submit" mat-raised-button class="btn btn-lg p-3" style="width: 100%; height: auto"
+                            color="primary">
                             <i class="bi bi-search"></i>
                             Search
                         </button>
                     </div>
                     <div class="col-6 col-lg-2">
-                        <button type="button" mat-raised-button class="btn btn-lg p-3"
-                            style="width: 100%; height: auto" (click)="onClear()">
+                        <button type="button" mat-raised-button class="btn btn-lg p-3" style="width: 100%; height: auto"
+                            (click)="onClear()">
                             <i class="bi bi-x-lg"></i>
                             Clear
                         </button>
@@ -331,21 +331,22 @@
 
 <!--- Dialog Task--->
 <p-dialog [(visible)]="displayDialogAddTodo" [modal]="true" [autoZIndex]="true" [draggable]="false"
-    [style]="{'width': '100vw'}" [contentStyle]="{'overflow':'auto'}" [closable]="true">
+    [style]="{'width': '80vw'}" [contentStyle]="{'overflow':'auto'}" [closable]="true">
     <ng-template pTemplate="header">
         <p class="text-header-dialog">
             {{ mode }} Task
         </p>
     </ng-template>
-    <v-task-work *ngIf="displayDialogAddTodo" [mode]="mode" [rowDataSelected]="rowDataSelected"
-        [indexSelected]="indexSelected" [previousStatus]="previousStatus" (confirmAdd)="confirmAdd($event)"
-        (confirmUpdate)="onConfirmUpdate($event)" (confirmCancel)="onConfirmCancel($event)"></v-task-work>
+        <v-task-work *ngIf="displayDialogAddTodo" [mode]="mode" [rowDataSelected]="rowDataSelected"
+            [indexSelected]="indexSelected" [previousStatus]="previousStatus" (confirmAdd)="confirmAdd($event)"
+            (confirmUpdate)="onConfirmUpdate($event)" (confirmCancel)="onConfirmCancel($event)"></v-task-work>
+
 </p-dialog>
 
 
 <!--- Dialog Delete--->
 <p-dialog [(visible)]="displayDialogDel" [modal]="true" [autoZIndex]="true" [draggable]="false"
-    [style]="{'width': '100vw'}" [contentStyle]="{'overflow':'auto'}" [closable]="true">
+    [style]="{'width': '80vw'}" [contentStyle]="{'overflow':'auto'}" [closable]="true">
     <ng-template pTemplate="header">
         <p class="text-header-dialog">
             Confirm Delete
