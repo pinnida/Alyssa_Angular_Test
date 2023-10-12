@@ -10,7 +10,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatChipsModule } from '@angular/material/chips';
-import {MatSelectModule } from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSortModule } from '@angular/material/sort';
+
 const materialModules = [
   MatInputModule,
   MatSidenavModule,
@@ -21,7 +23,10 @@ const materialModules = [
   MatMenuModule,
   MatTableModule,
   MatChipsModule,
-  MatSelectModule
+  MatSelectModule,
+  MatSortModule,
+  // MatSort,
+  // MatSortModule
 ];
 
 @NgModule({

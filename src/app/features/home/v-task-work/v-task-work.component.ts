@@ -10,9 +10,9 @@ import { IInput } from '../fe-home/fe-home.component';
 })
 export class VTaskWorkComponent {
   @Input() mode!: string;
-  @Input() rowDataSelected!: IInput;
-  @Input() indexSelected!: number;
-  @Input() previousStatus!: string;
+  @Input() rowDataSelected: any | null;
+  @Input() indexSelected!: any | null;
+  @Input() previousStatus!: any | null;
 
   @Output() confirmAdd: EventEmitter<any> = new EventEmitter();
   @Output() confirmUpdate: EventEmitter<any> = new EventEmitter();

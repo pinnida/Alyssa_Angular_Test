@@ -1,7 +1,7 @@
 <div class="demo-button-container">
-    <button mat-raised-button (click)="addTodo()" class="demo-button">
-        <i class="bi bi-patch-plus"></i>
-        Todo
+    <button mat-raised-button (click)="addTodo()" color="primary" class="btn btn-lg p-3">
+        <i class="bi bi-plus-circle"></i>
+        Create Task
     </button>
     <!-- <button
         mat-raised-button
@@ -15,13 +15,16 @@
 
 <div class="row">
     <div class="col-4">
-        <div class="col-12">
-            To do ({{ dataSourceTodo.length }})
+        <div class="col-12 my-2">
+            <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3 text-center">
+                To do ({{ dataSourceTodo.length }})
+            </div>
         </div>
         <div class="col-12 example-container">
             <table mat-table [dataSource]="dataSourceTodo" class="mat-elevation-z8 demo-table">
-                <ng-container [matColumnDef]="column.field" *ngFor="let column of columns">
-                    <th mat-header-cell *matHeaderCellDef> {{ column.header }}
+                <ng-container [matColumnDef]="column.field" *ngFor="let column of columns" matSort
+                    [matSortActive]="column.header" (matSortChange)="sortTB($event, 'Todo')">
+                    <th mat-header-cell [mat-sort-header]="column.header" *matHeaderCellDef> {{ column.header }}
                     </th>
                     <td mat-cell *matCellDef="let element let i = index">
                         <span *ngIf="column.field === 'title'">
@@ -64,9 +67,7 @@
                             </div>
                         </span>
                         <span *ngIf="column.field === 'createDate'">
-                            {{ element[column.field] }}
-
-                            <!-- {{ element[column.field] | aDate}} -->
+                            {{ element[column.field] | aDate }}
                         </span>
                         <span *ngIf="column.field === 'action'">
                             <button mat-mini-fab color="primary" class="m-2" (click)="onEdit(element, i)">
@@ -94,13 +95,16 @@
     </div>
 
     <div class="col-4">
-        <div class="col-12">
-            To do ({{ dataSourceInProgress.length }})
+        <div class="col-12 my-2">
+            <div class="p-3 text-warning-emphasis bg-warning-subtle border border-warning-subtle rounded-3 text-center">
+                InProgress ({{ dataSourceInProgress.length }})
+            </div>
         </div>
         <div class="col-12 example-container">
             <table mat-table [dataSource]="dataSourceInProgress" class="mat-elevation-z8 demo-table">
-                <ng-container [matColumnDef]="column.field" *ngFor="let column of columns">
-                    <th mat-header-cell *matHeaderCellDef> {{ column.header }}
+                <ng-container [matColumnDef]="column.field" *ngFor="let column of columns" matSort
+                    [matSortActive]="column.header" (matSortChange)="sortTB($event, 'InProgress')">
+                    <th mat-header-cell [mat-sort-header]="column.header" *matHeaderCellDef> {{ column.header }}
                     </th>
                     <td mat-cell *matCellDef="let element let i = index">
                         <span *ngIf="column.field === 'title'">
@@ -143,9 +147,7 @@
                             </div>
                         </span>
                         <span *ngIf="column.field === 'createDate'">
-                            {{ element[column.field] }}
-
-                            <!-- {{ element[column.field] | aDate}} -->
+                            {{ element[column.field] | aDate }}
                         </span>
                         <span *ngIf="column.field === 'action'">
                             <button mat-mini-fab color="primary" class="m-2" (click)="onEdit(element, i)">
@@ -173,13 +175,16 @@
     </div>
 
     <div class="col-4">
-        <div class="col-12">
-            To do ({{ dataSourceDone.length }})
+        <div class="col-12 my-2">
+            <div class="p-3 text-success-emphasis bg-success-subtle border border-success-subtle rounded-3 text-center">
+                Done ({{ dataSourceDone.length }})
+            </div>
         </div>
         <div class="col-12 example-container">
             <table mat-table [dataSource]="dataSourceDone" class="mat-elevation-z8 demo-table">
-                <ng-container [matColumnDef]="column.field" *ngFor="let column of columns">
-                    <th mat-header-cell *matHeaderCellDef> {{ column.header }}
+                <ng-container [matColumnDef]="column.field" *ngFor="let column of columns" matSort
+                    [matSortActive]="column.header" (matSortChange)="sortTB($event, 'Done')">
+                    <th mat-header-cell [mat-sort-header]="column.header" *matHeaderCellDef> {{ column.header }}
                     </th>
                     <td mat-cell *matCellDef="let element let i = index">
                         <span *ngIf="column.field === 'title'">
@@ -222,9 +227,7 @@
                             </div>
                         </span>
                         <span *ngIf="column.field === 'createDate'">
-                            {{ element[column.field] }}
-
-                            <!-- {{ element[column.field] | aDate}} -->
+                            {{ element[column.field] | aDate }}
                         </span>
                         <span *ngIf="column.field === 'action'">
                             <button mat-mini-fab color="primary" class="m-2" (click)="onEdit(element, i)">
@@ -269,4 +272,6 @@
         (confirmUpdate)="onConfirmUpdate($event)" (confirmCancel)="onConfirmCancel($event)"></v-task-work>
 </p-dialog>
 
-<pre>{{ this.dataSourceTodo | json }}</pre>
+<!-- <pre>{{ this.dataSourceTodo | json }}</pre>
+<pre>{{ this.dataSourceInProgress | json }}</pre>
+<pre>{{ this.dataSourceDone | json }}</pre> -->

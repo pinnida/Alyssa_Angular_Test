@@ -5,6 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AuthenticationService } from 'src/shared/services/authentication.service';
 import { SwalService } from 'src/shared/services/swal.service';
 
+// lodash
+import * as _ from 'lodash';
 export interface IInput {
   title: string;
   description: string;
@@ -17,8 +19,8 @@ export interface IInput {
 
 const ELEMENT_DATA: IInput[] = [
   { title: 'AA', description: 'text', priority: 'High', category: 'Work', status: 'Todo', createDate: new Date(), action: '' },
-  { title: 'BB', description: 'text', priority: 'Medium', category: 'Personal', status: 'InProgress', createDate: new Date(), action: '' },
-  { title: 'CC', description: 'text', priority: 'Low', category: 'Study', status: 'Done', createDate: new Date(), action: '' },
+  { title: 'BB', description: 'text', priority: 'Medium', category: 'Personal', status: 'Todo', createDate: new Date(), action: '' },
+  { title: 'CC', description: 'text', priority: 'Low', category: 'Study', status: 'Todo', createDate: new Date(), action: '' },
   { title: 'DD', description: 'text', priority: 'Low', category: 'Work', status: 'Todo', createDate: new Date(), action: '' },
   { title: 'EE', description: 'text', priority: 'Low', category: 'Work', status: 'Todo', createDate: new Date(), action: '' },
 ];
@@ -45,9 +47,9 @@ export class FeHomeComponent {
   dataSourceDone = [] as any;
 
   mode: string = 'Create';
-  indexSelected!: number;
-  rowDataSelected!: IInput;
-  previousStatus!: string;
+  indexSelected!: number | null;
+  rowDataSelected!: IInput | null;
+  previousStatus!: string| null;
 
   columns = [
     { field: 'title', header: 'Title' },
@@ -69,6 +71,9 @@ export class FeHomeComponent {
 
   addTodo() {
     this.mode = 'Create';
+    this.rowDataSelected = null;
+    this.indexSelected = null;
+    this.previousStatus = null;
     this.displayDialogAddTodo = true;
   }
 
@@ -79,7 +84,7 @@ export class FeHomeComponent {
   }
 
   onConfirmUpdate(e: any) {
-    console.log('onConfirmUpdate', );
+    console.log('onConfirmUpdate',);
     const value = e.value;
     const index = e.index;
     const previousStatus = e.previousStatus;
@@ -120,6 +125,19 @@ export class FeHomeComponent {
 
     let _clone = [...this[arrayData]];
     this[arrayData] = _clone.filter((item: any, i: number) => { return i !== indexSelected });
+  }
+
+  sortTB(e: any,tableName: string) {
+    const arrayData = `dataSource${tableName}` as any;
+    const direction = e.direction;
+    const active = e.active.toLowerCase();
+
+    if (!direction) {
+      return
+    }
+
+    this[arrayData] = _.orderBy(this[arrayData], [active], [direction]);
+
   }
 
 }
