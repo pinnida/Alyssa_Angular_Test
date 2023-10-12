@@ -31,7 +31,15 @@
                             {{element[column.field]}}
                         </span>
                         <span *ngIf="column.field === 'priority'">
-                            <mat-chip>
+                            <mat-chip *ngIf="element[column.field] === 'High'">
+                                <i class="bi bi-chevron-double-up"></i>
+                                {{element[column.field]}}
+                            </mat-chip>
+                            <mat-chip *ngIf="element[column.field] === 'Medium'">
+                                {{element[column.field]}}
+                            </mat-chip>
+                            <mat-chip *ngIf="element[column.field] === 'Low'">
+                                <i class="bi bi-chevron-double-down"></i>
                                 {{element[column.field]}}
                             </mat-chip>
                         </span>
@@ -39,9 +47,21 @@
                             {{element[column.field]}}
                         </span>
                         <span *ngIf="column.field === 'status'">
-                            <mat-chip>
+                            <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3 text-center"
+                                *ngIf="element[column.field] === 'Todo'">
+                                <i class="bi bi-circle-fill" class="text-secondary"></i>
                                 {{element[column.field]}}
-                            </mat-chip>
+                            </div>
+                            <div class="p-3 text-warning-emphasis bg-warning-subtle border border-warning-subtle rounded-3 text-center"
+                                *ngIf="element[column.field] === 'InProgress'">
+                                <i class="bi bi-circle-fill" class="text-secondary"></i>
+                                {{element[column.field]}}
+                            </div>
+                            <div class="p-3 text-success-emphasis bg-success-subtle border border-success-subtle rounded-3 text-center"
+                                *ngIf="element[column.field] === 'Done'">
+                                <i class="bi bi-circle-fill" class="text-secondary"></i>
+                                {{element[column.field]}}
+                            </div>
                         </span>
                         <span *ngIf="column.field === 'createDate'">
                             {{ element[column.field] }}
@@ -90,7 +110,15 @@
                             {{element[column.field]}}
                         </span>
                         <span *ngIf="column.field === 'priority'">
-                            <mat-chip>
+                            <mat-chip *ngIf="element[column.field] === 'High'">
+                                <i class="bi bi-chevron-double-up"></i>
+                                {{element[column.field]}}
+                            </mat-chip>
+                            <mat-chip *ngIf="element[column.field] === 'Medium'">
+                                {{element[column.field]}}
+                            </mat-chip>
+                            <mat-chip *ngIf="element[column.field] === 'Low'">
+                                <i class="bi bi-chevron-double-down"></i>
                                 {{element[column.field]}}
                             </mat-chip>
                         </span>
@@ -98,9 +126,21 @@
                             {{element[column.field]}}
                         </span>
                         <span *ngIf="column.field === 'status'">
-                            <mat-chip>
+                            <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3 text-center"
+                                *ngIf="element[column.field] === 'Todo'">
+                                <i class="bi bi-circle-fill" class="text-secondary"></i>
                                 {{element[column.field]}}
-                            </mat-chip>
+                            </div>
+                            <div class="p-3 text-warning-emphasis bg-warning-subtle border border-warning-subtle rounded-3 text-center"
+                                *ngIf="element[column.field] === 'InProgress'">
+                                <i class="bi bi-circle-fill" class="text-secondary"></i>
+                                {{element[column.field]}}
+                            </div>
+                            <div class="p-3 text-success-emphasis bg-success-subtle border border-success-subtle rounded-3 text-center"
+                                *ngIf="element[column.field] === 'Done'">
+                                <i class="bi bi-circle-fill" class="text-secondary"></i>
+                                {{element[column.field]}}
+                            </div>
                         </span>
                         <span *ngIf="column.field === 'createDate'">
                             {{ element[column.field] }}
@@ -149,7 +189,15 @@
                             {{element[column.field]}}
                         </span>
                         <span *ngIf="column.field === 'priority'">
-                            <mat-chip>
+                            <mat-chip *ngIf="element[column.field] === 'High'">
+                                <i class="bi bi-chevron-double-up"></i>
+                                {{element[column.field]}}
+                            </mat-chip>
+                            <mat-chip *ngIf="element[column.field] === 'Medium'">
+                                {{element[column.field]}}
+                            </mat-chip>
+                            <mat-chip *ngIf="element[column.field] === 'Low'">
+                                <i class="bi bi-chevron-double-down"></i>
                                 {{element[column.field]}}
                             </mat-chip>
                         </span>
@@ -157,9 +205,21 @@
                             {{element[column.field]}}
                         </span>
                         <span *ngIf="column.field === 'status'">
-                            <mat-chip>
+                            <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3 text-center"
+                                *ngIf="element[column.field] === 'Todo'">
+                                <i class="bi bi-circle-fill" class="text-secondary"></i>
                                 {{element[column.field]}}
-                            </mat-chip>
+                            </div>
+                            <div class="p-3 text-warning-emphasis bg-warning-subtle border border-warning-subtle rounded-3 text-center"
+                                *ngIf="element[column.field] === 'InProgress'">
+                                <i class="bi bi-circle-fill" class="text-secondary"></i>
+                                {{element[column.field]}}
+                            </div>
+                            <div class="p-3 text-success-emphasis bg-success-subtle border border-success-subtle rounded-3 text-center"
+                                *ngIf="element[column.field] === 'Done'">
+                                <i class="bi bi-circle-fill" class="text-secondary"></i>
+                                {{element[column.field]}}
+                            </div>
                         </span>
                         <span *ngIf="column.field === 'createDate'">
                             {{ element[column.field] }}
@@ -204,14 +264,9 @@
             {{ mode }} Task
         </p>
     </ng-template>
-    <v-task-work *ngIf="displayDialogAddTodo"
-    [mode]="mode"
-    [rowDataSelected]="rowDataSelected"
-    [indexSelected]="indexSelected"
-    [previousStatus]="previousStatus"
-    (confirmAdd)="confirmAdd($event)"
-    (confirmUpdate)="onConfirmUpdate($event)"
-    (confirmCancel)="onConfirmCancel($event)"></v-task-work>
+    <v-task-work *ngIf="displayDialogAddTodo" [mode]="mode" [rowDataSelected]="rowDataSelected"
+        [indexSelected]="indexSelected" [previousStatus]="previousStatus" (confirmAdd)="confirmAdd($event)"
+        (confirmUpdate)="onConfirmUpdate($event)" (confirmCancel)="onConfirmCancel($event)"></v-task-work>
 </p-dialog>
 
 <pre>{{ this.dataSourceTodo | json }}</pre>

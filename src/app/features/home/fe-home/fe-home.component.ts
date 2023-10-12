@@ -17,8 +17,8 @@ export interface IInput {
 
 const ELEMENT_DATA: IInput[] = [
   { title: 'AA', description: 'text', priority: 'High', category: 'Work', status: 'Todo', createDate: new Date(), action: '' },
-  { title: 'BB', description: 'text', priority: 'Medium', category: 'Personal', status: 'Todo', createDate: new Date(), action: '' },
-  { title: 'CC', description: 'text', priority: 'Low', category: 'Study', status: 'Todo', createDate: new Date(), action: '' },
+  { title: 'BB', description: 'text', priority: 'Medium', category: 'Personal', status: 'InProgress', createDate: new Date(), action: '' },
+  { title: 'CC', description: 'text', priority: 'Low', category: 'Study', status: 'Done', createDate: new Date(), action: '' },
   { title: 'DD', description: 'text', priority: 'Low', category: 'Work', status: 'Todo', createDate: new Date(), action: '' },
   { title: 'EE', description: 'text', priority: 'Low', category: 'Work', status: 'Todo', createDate: new Date(), action: '' },
 ];
