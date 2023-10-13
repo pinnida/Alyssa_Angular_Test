@@ -119,12 +119,9 @@
                             {{ element[column.field] | aDate }}
                         </span>
                         <span *ngIf="column.field === 'action'">
-                            <button mat-mini-fab color="primary" class="m-2" (click)="onEdit(element, i)">
-                                <i class="bi bi-pencil"></i>
-                            </button>
-                            <button mat-mini-fab color="warn" class="m-2" (click)="onDel(element, i, 'Todo')">
-                                <i class="bi bi-trash3"></i>
-                            </button>
+                            <ng-container [ngTemplateOutlet]="actionTpl"
+                                [ngTemplateOutletContext]="{ element : element, column: column, rowIndex : i, tableName: 'Todo'}">
+                            </ng-container>
                         </span>
                     </td>
                 </ng-container>
@@ -178,12 +175,9 @@
                             {{ element[column.field] | aDate }}
                         </span>
                         <span *ngIf="column.field === 'action'">
-                            <button mat-mini-fab color="primary" class="m-2" (click)="onEdit(element, i)">
-                                <i class="bi bi-pencil"></i>
-                            </button>
-                            <button mat-mini-fab color="warn" class="m-2" (click)="onDel(element, i, 'InProgress')">
-                                <i class="bi bi-trash3"></i>
-                            </button>
+                            <ng-container [ngTemplateOutlet]="actionTpl"
+                                [ngTemplateOutletContext]="{ element : element, column: column, rowIndex : i, tableName: 'InProgress'}">
+                            </ng-container>
                         </span>
                     </td>
                 </ng-container>
@@ -238,12 +232,9 @@
                             {{ element[column.field] | aDate }}
                         </span>
                         <span *ngIf="column.field === 'action'">
-                            <button mat-mini-fab color="primary" class="m-2" (click)="onEdit(element, i)">
-                                <i class="bi bi-pencil"></i>
-                            </button>
-                            <button mat-mini-fab color="warn" class="m-2" (click)="onDel(element, i, 'Done')">
-                                <i class="bi bi-trash3"></i>
-                            </button>
+                            <ng-container [ngTemplateOutlet]="actionTpl"
+                                [ngTemplateOutletContext]="{ element : element, column: column, rowIndex : i, tableName: 'Done'}">
+                            </ng-container>
                         </span>
                     </td>
                 </ng-container>
@@ -265,7 +256,23 @@
 </div>
 
 
-<!-- Template  -->
+
+<!-- Template priority -->
+<ng-template #priorityTpl let-element="element" let-column="column" let-rowIndex="rowIndex">
+    <mat-chip *ngIf="element[column.field] === 'High'" class="bg-danger-subtle">
+        <i class="bi bi-chevron-double-up"></i>
+        {{element[column.field]}}
+    </mat-chip>
+    <mat-chip *ngIf="element[column.field] === 'Medium'" class="bg-info-subtle">
+        {{element[column.field]}}
+    </mat-chip>
+    <mat-chip *ngIf="element[column.field] === 'Low'" class="bg-warning-subtle">
+        <i class="bi bi-chevron-double-down"></i>
+        {{element[column.field]}}
+    </mat-chip>
+</ng-template>
+
+<!-- Template status -->
 <ng-template #statusTpl let-element="element" let-column="column" let-rowIndex="rowIndex">
     <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3 text-center"
         *ngIf="element[column.field] === 'Todo'">
@@ -284,20 +291,14 @@
     </div>
 </ng-template>
 
-
-<!-- Template  -->
-<ng-template #priorityTpl let-element="element" let-column="column" let-rowIndex="rowIndex">
-    <mat-chip *ngIf="element[column.field] === 'High'" class="bg-danger-subtle">
-        <i class="bi bi-chevron-double-up"></i>
-        {{element[column.field]}}
-    </mat-chip>
-    <mat-chip *ngIf="element[column.field] === 'Medium'" class="bg-info-subtle">
-        {{element[column.field]}}
-    </mat-chip>
-    <mat-chip *ngIf="element[column.field] === 'Low'" class="bg-warning-subtle">
-        <i class="bi bi-chevron-double-down"></i>
-        {{element[column.field]}}
-    </mat-chip>
+<!-- Template action -->
+<ng-template #actionTpl let-element="element" let-column="column" let-rowIndex="rowIndex" let-tableName="tableName">
+    <button mat-mini-fab color="primary" class="m-2" (click)="onEdit(element, rowIndex)">
+        <i class="bi bi-pencil"></i>
+    </button>
+    <button mat-mini-fab color="warn" class="m-2" (click)="onDel(element, rowIndex, tableName)">
+        <i class="bi bi-trash3"></i>
+    </button>
 </ng-template>
 
 
