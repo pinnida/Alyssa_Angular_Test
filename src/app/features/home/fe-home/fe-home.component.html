@@ -330,6 +330,12 @@
         (delCancel)="onDelCancel($event)"></v-confirm-delete>
 </p-dialog>
 
+
+<!-- toast -->
+<p-toast key="Toast" position="bottom-right" [showTransformOptions]="'translateY(100%)'"
+    [showTransitionOptions]="'1000ms'" [hideTransitionOptions]="'1000ms'"
+    [showTransformOptions]="'translateX(100%)'">
+</p-toast>
 <!-- <pre>{{ this.dataSourceTodo | json }}</pre>
 <pre>{{ this.dataSourceInProgress | json }}</pre>
 <pre>{{ this.dataSourceDone | json }}</pre> -->

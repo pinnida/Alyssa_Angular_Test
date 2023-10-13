@@ -18,11 +18,14 @@ import * as _ from 'lodash';
 
 // dayjs
 import * as dayjs from 'dayjs';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'fe-home',
   templateUrl: './fe-home.component.html',
-  styleUrls: ['./fe-home.component.scss']
+  styleUrls: ['./fe-home.component.scss'],
+  providers: [MessageService]
+
 })
 export class FeHomeComponent {
   showLoading: boolean = false;
@@ -55,6 +58,7 @@ export class FeHomeComponent {
     private swalSVC: SwalService,
     private fb: NonNullableFormBuilder,
     private mock2Service: Mock2Service,
+    private messageService: MessageService
   ) { }
 
   async ngOnInit() {
@@ -145,6 +149,7 @@ export class FeHomeComponent {
     const value = e.value;
     this.dataSourceTodo = [value, ...this.dataSourceTodo];
     this.displayDialogAddTodo = false;
+    this.messageService.add({ key: 'Toast', severity: 'success', summary: 'Success', detail: 'Successfully created', sticky: true });
   }
 
   onConfirmUpdate(e: any) {
@@ -169,6 +174,8 @@ export class FeHomeComponent {
     }
 
     this.displayDialogAddTodo = false;
+    this.messageService.add({ key: 'Toast', severity: 'success', summary: 'Success', detail: 'Successfully updated', sticky: true });
+
   }
 
   onConfirmCancel(e: any) {
@@ -214,6 +221,7 @@ export class FeHomeComponent {
     this[tableSelected] = _clone.filter((item: any, i: number) => { return i !== indexSelected });
     this.displayDialogDel = false;
     this.showLoading = false;
+    this.messageService.add({ key: 'Toast', severity: 'warn', summary: 'Success', detail: 'Successfully deleted', sticky: true});
   }
 
   onDelCancel(e: any) {

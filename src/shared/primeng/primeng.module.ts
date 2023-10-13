@@ -38,6 +38,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { PanelModule } from "primeng/panel";
 import { RippleModule } from "primeng/ripple";
 import { TooltipModule } from 'primeng/tooltip';
+import { MessagesModule } from 'primeng/messages';
 
 
 const primengModules = [
@@ -64,7 +65,7 @@ const primengModules = [
   ChipModule,
   KeyFilterModule,
   SkeletonModule,
-
+  MessagesModule,
   ToastModule,
   CalendarModule,
   SliderModule,
