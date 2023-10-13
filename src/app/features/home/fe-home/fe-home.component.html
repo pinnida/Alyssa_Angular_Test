@@ -103,17 +103,9 @@
                             {{element[column.field]}}
                         </span>
                         <span *ngIf="column.field === 'priority'">
-                            <mat-chip *ngIf="element[column.field] === 'High'">
-                                <i class="bi bi-chevron-double-up"></i>
-                                {{element[column.field]}}
-                            </mat-chip>
-                            <mat-chip *ngIf="element[column.field] === 'Medium'">
-                                {{element[column.field]}}
-                            </mat-chip>
-                            <mat-chip *ngIf="element[column.field] === 'Low'">
-                                <i class="bi bi-chevron-double-down"></i>
-                                {{element[column.field]}}
-                            </mat-chip>
+                            <ng-container [ngTemplateOutlet]="priorityTpl"
+                                [ngTemplateOutletContext]="{ element : element, column: column, rowIndex : i}">
+                            </ng-container>
                         </span>
                         <span *ngIf="column.field === 'category'">
                             {{element[column.field]}}
@@ -182,17 +174,9 @@
                             {{element[column.field]}}
                         </span>
                         <span *ngIf="column.field === 'priority'">
-                            <mat-chip *ngIf="element[column.field] === 'High'">
-                                <i class="bi bi-chevron-double-up"></i>
-                                {{element[column.field]}}
-                            </mat-chip>
-                            <mat-chip *ngIf="element[column.field] === 'Medium'">
-                                {{element[column.field]}}
-                            </mat-chip>
-                            <mat-chip *ngIf="element[column.field] === 'Low'">
-                                <i class="bi bi-chevron-double-down"></i>
-                                {{element[column.field]}}
-                            </mat-chip>
+                            <ng-container [ngTemplateOutlet]="priorityTpl"
+                                [ngTemplateOutletContext]="{ element : element, column: column, rowIndex : i}">
+                            </ng-container>
                         </span>
                         <span *ngIf="column.field === 'category'">
                             {{element[column.field]}}
@@ -262,17 +246,9 @@
                             {{element[column.field]}}
                         </span>
                         <span *ngIf="column.field === 'priority'">
-                            <mat-chip *ngIf="element[column.field] === 'High'">
-                                <i class="bi bi-chevron-double-up"></i>
-                                {{element[column.field]}}
-                            </mat-chip>
-                            <mat-chip *ngIf="element[column.field] === 'Medium'">
-                                {{element[column.field]}}
-                            </mat-chip>
-                            <mat-chip *ngIf="element[column.field] === 'Low'">
-                                <i class="bi bi-chevron-double-down"></i>
-                                {{element[column.field]}}
-                            </mat-chip>
+                            <ng-container [ngTemplateOutlet]="priorityTpl"
+                                [ngTemplateOutletContext]="{ element : element, column: column, rowIndex : i}">
+                            </ng-container>
                         </span>
                         <span *ngIf="column.field === 'category'">
                             {{element[column.field]}}
@@ -325,6 +301,19 @@
 </div>
 
 
+<ng-template #priorityTpl let-element="element" let-column="column" let-rowIndex="rowIndex">
+    <mat-chip *ngIf="element[column.field] === 'High'" class="bg-danger-subtle">
+        <i class="bi bi-chevron-double-up"></i>
+        {{element[column.field]}}
+    </mat-chip>
+    <mat-chip *ngIf="element[column.field] === 'Medium'" class="bg-info-subtle">
+        {{element[column.field]}}
+    </mat-chip>
+    <mat-chip *ngIf="element[column.field] === 'Low'" class="bg-warning-subtle">
+        <i class="bi bi-chevron-double-down"></i>
+        {{element[column.field]}}
+    </mat-chip>
+</ng-template>
 
 
 <!--- Dialog Task--->
