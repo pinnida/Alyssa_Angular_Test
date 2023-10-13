@@ -1,44 +1,23 @@
 import { Component } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { finalize, lastValueFrom } from 'rxjs';
 
 // services
 import { AuthenticationService } from 'src/shared/services/authentication.service';
 import { SwalService } from 'src/shared/services/swal.service';
+import { Mock2Service } from 'src/shared/services/mock2.service';
+
+// data
+import { CategoryOptions, PriorityOptions, StatusOptions } from 'src/assets/data/dropdown.data';
+
+// models interface
+import { IInput } from 'src/assets/data/interface.model';
 
 // lodash
 import * as _ from 'lodash';
 
 // dayjs
 import * as dayjs from 'dayjs';
-
-export interface IInput {
-  title: string;
-  description: string;
-  priority: string;
-  category: string;
-  status: string;
-  createDate: Date;
-  action: string;
-}
-
-const ELEMENT_DATA: IInput[] = [
-  { title: 'AA', description: 'text', priority: 'High', category: 'Work', status: 'Todo', createDate: new Date('2023-10-10'), action: '' },
-  { title: 'BB', description: 'text', priority: 'Medium', category: 'Personal', status: 'Todo', createDate: new Date(), action: '' },
-  { title: 'CC', description: 'text', priority: 'Low', category: 'Study', status: 'Todo', createDate: new Date(), action: '' },
-  { title: 'DD', description: 'text', priority: 'Low', category: 'Work', status: 'Todo', createDate: new Date(), action: '' },
-  { title: 'EE', description: 'text', priority: 'Low', category: 'Work', status: 'Todo', createDate: new Date(), action: '' },
-];
-
-const ELEMENT_DATA_2: IInput[] = [
-  { title: 'AA', description: 'text', priority: 'High', category: 'Work', status: 'InProgress', createDate: new Date(), action: '' },
-  { title: 'BB', description: 'text', priority: 'Medium', category: 'Personal', status: 'InProgress', createDate: new Date(), action: '' },
-  { title: 'CC', description: 'text', priority: 'Low', category: 'Study', status: 'InProgress', createDate: new Date(), action: '' },
-];
-
-const ELEMENT_DATA_3: IInput[] = [
-  { title: 'AA', description: 'text', priority: 'High', category: 'Work', status: 'Done', createDate: new Date(), action: '' },
-  { title: 'BB', description: 'text', priority: 'Medium', category: 'Personal', status: 'Done', createDate: new Date(), action: '' },
-];
 
 @Component({
   selector: 'fe-home',
@@ -52,56 +31,54 @@ export class FeHomeComponent {
   displayDialogAddTodo: boolean = false;
   displayDialogDel: boolean = false;
   user$ = this.authenticationSVC.currentUser$;
+  columns: any[] = []
   displayedColumns: string[] = ['title', 'description', 'priority', 'category', 'status', 'createDate', 'action'];
-
-  dataSourceTodo = [...ELEMENT_DATA];
-  dataSourceInProgress = [...ELEMENT_DATA_2];
-  dataSourceDone = [...ELEMENT_DATA_3] as any;
-
+  dataSourceTodo = [] as Array<IInput>;
+  dataSourceInProgress = [] as Array<IInput>;
+  dataSourceDone = [] as Array<IInput>;
   mode: string = 'Create';
   indexSelected!: number | null;
   rowDataSelected!: IInput | null;
   previousStatus!: string | null;
-  tableSelected!: any | null;
+  tableSelected!: string | null;
+  myFormFilter!: FormGroup;
 
-  myFormFilter!: FormGroup
+  DDL = {
+    PriorityOptions: PriorityOptions as Array<any>,
+    CategoryOptions: CategoryOptions as Array<any>,
+    StatusOptions: StatusOptions as Array<any>,
+  };
 
-  PriorityOptions = [
-    { text: 'High', value: 'High' },
-    { text: 'Medium', value: 'Medium' },
-    { text: 'Low', value: 'Low' },
-  ];
 
-  CategoryOptions = [
-    { text: 'Work', value: 'Work', icon: 'bi bi-laptop' },
-    { text: 'Personal', value: 'Personal', icon: 'bi bi-person' },
-    { text: 'Study', value: 'Study', icon: 'bi bi-backpack' },
-  ];
-
-  StatusOptions = [
-    { text: 'Todo', value: 'Todo' },
-    { text: 'InProgress', value: 'InProgress' },
-    { text: 'Done', value: 'Done' },
-  ];
-
-  columns = [
-    { field: 'title', header: 'Title' },
-    { field: 'description', header: 'Description' },
-    { field: 'priority', header: 'Priority' },
-    { field: 'category', header: 'Category' },
-    { field: 'status', header: 'Status' },
-    { field: 'createDate', header: 'CreateDate' },
-    { field: 'action', header: 'Action' },
-
-  ];
   constructor(
     private authenticationSVC: AuthenticationService,
     private swalSVC: SwalService,
-    private fb: NonNullableFormBuilder
+    private fb: NonNullableFormBuilder,
+    private mock2Service: Mock2Service,
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.columns = [
+      { field: 'title', header: 'Title' },
+      { field: 'description', header: 'Description' },
+      { field: 'priority', header: 'Priority' },
+      { field: 'category', header: 'Category' },
+      { field: 'status', header: 'Status' },
+      { field: 'createDate', header: 'CreateDate' },
+      { field: 'action', header: 'Action' },
+    ];
+
     this.createForm();
+
+    // DataTables
+    this.dataSourceTodo = await this.getDataToDoList();
+    this.dataSourceInProgress = await this.getInProgressList();
+    this.dataSourceDone = await this.getDoneList();
+
+    // Dropdowns
+    this.DDL.PriorityOptions = PriorityOptions;
+    this.DDL.CategoryOptions = CategoryOptions;
+    this.DDL.StatusOptions = StatusOptions;
   }
 
   createForm() {
@@ -112,6 +89,48 @@ export class FeHomeComponent {
       startDate: [new Date(),],
       endDate: [new Date(),],
     });
+  }
+
+  async getDataToDoList() {
+    this.showLoading = true;
+    try {
+      const resp = await lastValueFrom(this.mock2Service.getToDoList());
+      return resp.data;
+
+    } catch (err) {
+      this.showLoading = false;
+      console.log(err);
+    } finally {
+      this.showLoading = false;
+    }
+  }
+
+  async getInProgressList() {
+    this.showLoading = true;
+    try {
+      const resp = await lastValueFrom(this.mock2Service.getInProgressList());
+      return resp.data;
+
+    } catch (err) {
+      this.showLoading = false;
+      console.log(err);
+    } finally {
+      this.showLoading = false;
+    }
+  }
+
+  async getDoneList() {
+    this.showLoading = true;
+    try {
+      const resp = await lastValueFrom(this.mock2Service.getDoneList());
+      return resp.data;
+
+    } catch (err) {
+      this.showLoading = false;
+      console.log(err);
+    } finally {
+      this.showLoading = false;
+    }
   }
 
   addTodo() {
@@ -129,7 +148,6 @@ export class FeHomeComponent {
   }
 
   onConfirmUpdate(e: any) {
-    console.log('onConfirmUpdate',);
     const value = e.value;
     const index = e.index;
     const previousStatus = e.previousStatus;
@@ -187,6 +205,7 @@ export class FeHomeComponent {
 
 
   onDelConfirm(e: any) {
+    this.showLoading = true;
     const arrayData = e.tableSelected;
     const indexSelected = e.indexSelected;
     const tableSelected = e.tableSelected;
@@ -194,6 +213,7 @@ export class FeHomeComponent {
     let _clone = [...this[arrayData]];
     this[tableSelected] = _clone.filter((item: any, i: number) => { return i !== indexSelected });
     this.displayDialogDel = false;
+    this.showLoading = false;
   }
 
   onDelCancel(e: any) {
@@ -203,13 +223,14 @@ export class FeHomeComponent {
     this.displayDialogDel = false;
   }
 
-  onSearch(form: FormGroup) {
+  async onSearch(form: FormGroup) {
     this.showLoading = true;
-    const clone1 = [...ELEMENT_DATA];
-    const clone2 = [...ELEMENT_DATA_2];
-    const clone3 = [...ELEMENT_DATA_3];
 
+    const clone1 = await this.getDataToDoList();
+    const clone2 = await this.getInProgressList();
+    const clone3 = await this.getDoneList();
 
+    // filter date range for Todo Table
     const filteredDatesRange1 = clone1.filter((item: any) => {
       let itemDate = dayjs(item.createDate).format('YYYY-MM-DD') as any;
       let startDate = dayjs(form.value.startDate).format('YYYY-MM-DD');
@@ -219,6 +240,8 @@ export class FeHomeComponent {
       }
     }
     );
+
+    // filter date range for InProgress Table
 
     const filteredDatesRange2 = clone2.filter((item: any) => {
       let itemDate = dayjs(item.createDate).format('YYYY-MM-DD') as any;
@@ -230,6 +253,7 @@ export class FeHomeComponent {
     }
     );
 
+    // filter date range for Done Table
     const filteredDatesRange3 = clone3.filter((item: any) => {
       let itemDate = dayjs(item.createDate).format('YYYY-MM-DD') as any;
       let startDate = dayjs(form.value.startDate).format('YYYY-MM-DD');
@@ -241,6 +265,7 @@ export class FeHomeComponent {
     );
 
 
+    // filter by priority, category, status for Todo Table
     this.dataSourceTodo = filteredDatesRange1.filter((item: any) => {
       if (!form.value.priority && !form.value.category && !form.value.status) {
         return item
@@ -290,6 +315,7 @@ export class FeHomeComponent {
       }
     });
 
+    // filter by priority, category, status for InProgress Table
     this.dataSourceInProgress = filteredDatesRange2.filter((item: any) => {
       if (!form.value.priority && !form.value.category && !form.value.status) {
         return item
@@ -339,6 +365,7 @@ export class FeHomeComponent {
       }
     });
 
+    // filter by priority, category, status for Done Table
     this.dataSourceDone = filteredDatesRange3.filter((item: any) => {
       if (!form.value.priority && !form.value.category && !form.value.status) {
         return item
@@ -393,13 +420,13 @@ export class FeHomeComponent {
     }, 400);
   }
 
-  onClear() {
+  async onClear() {
     this.showLoading = true;
     this.createForm();
 
-    this.dataSourceTodo = [...ELEMENT_DATA];
-    this.dataSourceInProgress = [...ELEMENT_DATA_2];
-    this.dataSourceDone = [...ELEMENT_DATA_3];
+    this.dataSourceTodo = await this.getDataToDoList();
+    this.dataSourceInProgress = await this.getInProgressList();
+    this.dataSourceDone = await this.getDoneList();
 
     setTimeout(() => {
       this.showLoading = false;

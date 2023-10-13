@@ -19,7 +19,7 @@
                 <mat-form-field appearance="outline" class="py-2">
                     <mat-label>Select Priority</mat-label>
                     <mat-select placeholder="Priority" formControlName="priority">
-                        <mat-option *ngFor="let priority of PriorityOptions" [value]="priority.value">
+                        <mat-option *ngFor="let priority of DDL.PriorityOptions" [value]="priority.value">
                             {{ priority.text }}
                         </mat-option>
                     </mat-select>
@@ -30,7 +30,7 @@
                 <mat-form-field appearance="outline" class="py-2">
                     <mat-label>Select Category</mat-label>
                     <mat-select placeholder="Category" formControlName="category">
-                        <mat-option *ngFor="let category of CategoryOptions" [value]="category.value">
+                        <mat-option *ngFor="let category of DDL.CategoryOptions" [value]="category.value">
                             <i class="{{ category.icon }}"></i>
                             {{ category.text }}
                         </mat-option>
@@ -39,10 +39,10 @@
                         Category is required
                     </mat-error>
                 </mat-form-field>
-                <mat-form-field appearance="outline" class="py-2">
+                <mat-form-field appearance="outline" class="py-2" [hidden]="mode === 'Create'">
                     <mat-label>Select Status</mat-label>
                     <mat-select placeholder="Status" formControlName="status">
-                        <mat-option *ngFor="let status of StatusOptions" [value]="status.value"
+                        <mat-option *ngFor="let status of DDL.StatusOptions" [value]="status.value"
                             [disabled]="!rowDataSelected">
                             {{ status.text }}
                         </mat-option>

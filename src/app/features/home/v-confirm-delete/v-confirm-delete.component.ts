@@ -1,37 +1,31 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 
+// data
+import { CategoryOptions, PriorityOptions, StatusOptions } from 'src/assets/data/dropdown.data';
+
+// model interface
+import { IInput } from 'src/assets/data/interface.model';
+
 @Component({
   selector: 'v-confirm-delete',
   templateUrl: './v-confirm-delete.component.html',
   styleUrls: ['./v-confirm-delete.component.scss']
 })
 export class VConfirmDeleteComponent {
-  @Input() rowDataSelected: any | null;
-  @Input() indexSelected!: any | null;
-  @Input() tableSelected!: any | null;
+  @Input() rowDataSelected!: IInput | null;
+  @Input() indexSelected!: number | null;
+  @Input() tableSelected!: string | null;
   @Output() delConfirm: EventEmitter<any> = new EventEmitter();
   @Output() delCancel: EventEmitter<any> = new EventEmitter();
 
   myForm!: FormGroup;
 
-  PriorityOptions = [
-    { text: 'High', value: 'High' },
-    { text: 'Medium', value: 'Medium' },
-    { text: 'Low', value: 'Low' },
-  ];
-
-  CategoryOptions = [
-    { text: 'Work', value: 'Work', icon: 'bi bi-laptop' },
-    { text: 'Personal', value: 'Personal', icon: 'bi bi-person' },
-    { text: 'Study', value: 'Study', icon: 'bi bi-backpack' },
-  ];
-
-  StatusOptions = [
-    { text: 'Todo', value: 'Todo' },
-    { text: 'InProgress', value: 'InProgress' },
-    { text: 'Done', value: 'Done' },
-  ];
+  DDL = {
+    PriorityOptions: PriorityOptions as Array<any>,
+    CategoryOptions: CategoryOptions as Array<any>,
+    StatusOptions: StatusOptions as Array<any>,
+  };
 
   constructor(
     private fb: NonNullableFormBuilder
@@ -39,6 +33,11 @@ export class VConfirmDeleteComponent {
 
   ngOnInit(): void {
     this.createForm();
+
+    // Dropdowns
+    this.DDL.PriorityOptions = PriorityOptions;
+    this.DDL.CategoryOptions = CategoryOptions;
+    this.DDL.StatusOptions = StatusOptions;
 
     if (this.rowDataSelected) {
       this.myForm.get('title')?.setValue(this.rowDataSelected.title);
@@ -62,11 +61,11 @@ export class VConfirmDeleteComponent {
     });
   }
 
-  onSubmit(){
-    this.delConfirm.emit({rowDataSelected: this.rowDataSelected, indexSelected: this.indexSelected, tableSelected: this.tableSelected})
+  onSubmit() {
+    this.delConfirm.emit({ rowDataSelected: this.rowDataSelected, indexSelected: this.indexSelected, tableSelected: this.tableSelected })
   }
 
-  onCancel(){
+  onCancel() {
     this.delCancel.emit()
   }
 }

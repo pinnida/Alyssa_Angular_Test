@@ -3,8 +3,6 @@
 <div class="row">
     <div class="col-12 py-2">
         <form [formGroup]="myFormFilter" class="form-container" (ngSubmit)="onSearch(myFormFilter)">
-
-
             <div class="p-3 text-secondary-emphasis bg-white border border-secondary-subtle rounded-3">
                 <div class="row mb-2">
                     <h3>Filter</h3>
@@ -14,7 +12,7 @@
                         <mat-form-field appearance="outline">
                             <mat-label>Select Priority</mat-label>
                             <mat-select placeholder="Priority" formControlName="priority">
-                                <mat-option *ngFor="let priority of PriorityOptions" [value]="priority.value">
+                                <mat-option *ngFor="let priority of DDL.PriorityOptions" [value]="priority.value">
                                     {{ priority.text }}
                                 </mat-option>
                             </mat-select>
@@ -24,7 +22,7 @@
                         <mat-form-field appearance="outline">
                             <mat-label>Select Category</mat-label>
                             <mat-select placeholder="Category" formControlName="category">
-                                <mat-option *ngFor="let category of CategoryOptions" [value]="category.value">
+                                <mat-option *ngFor="let category of DDL.CategoryOptions" [value]="category.value">
                                     <i class="{{ category.icon }}"></i>
                                     {{ category.text }}
                                 </mat-option>
@@ -35,7 +33,7 @@
                         <mat-form-field appearance="outline">
                             <mat-label>Select Status</mat-label>
                             <mat-select placeholder="Status" formControlName="status">
-                                <mat-option *ngFor="let status of StatusOptions" [value]="status.value">
+                                <mat-option *ngFor="let status of DDL.StatusOptions" [value]="status.value">
                                     {{ status.text }}
                                 </mat-option>
                             </mat-select>
@@ -88,7 +86,7 @@
     <div class="col-12 col-lg-4">
         <div class="col-12 my-2">
             <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3 text-center">
-                To do ({{ dataSourceTodo.length }})
+                To do ({{ dataSourceTodo ? dataSourceTodo.length : 0 }})
             </div>
         </div>
         <div class="col-12 example-container">
@@ -152,9 +150,9 @@
                 </ng-container>
 
                 <!-- No Data Row -->
-                <tr class="mat-row text-center hover-white" *matNoDataRow>
+                <tr class="mat-row text-center hover-white" *matNoDataRow style="height: 114px;">
                     <td [attr.colspan]="displayedColumns.length">
-                        No data available
+                        <p class="text-muted">No data available</p>
                     </td>
                 </tr>
 
@@ -232,9 +230,9 @@
 
 
                 <!-- No Data Row -->
-                <tr class="mat-row text-center hover-white" *matNoDataRow>
+                <tr class="mat-row text-center hover-white" *matNoDataRow style="height: 114px;">
                     <td [attr.colspan]="displayedColumns.length">
-                        No data available
+                        <p class="text-muted">No data available</p>
                     </td>
                 </tr>
 
@@ -312,9 +310,9 @@
 
 
                 <!-- No Data Row -->
-                <tr class="mat-row text-center hover-white" *matNoDataRow>
+                <tr class="mat-row text-center hover-white" *matNoDataRow style="height: 114px;">
                     <td [attr.colspan]="displayedColumns.length">
-                        No data available
+                        <p class="text-muted">No data available</p>
                     </td>
                 </tr>
 
@@ -337,9 +335,9 @@
             {{ mode }} Task
         </p>
     </ng-template>
-        <v-task-work *ngIf="displayDialogAddTodo" [mode]="mode" [rowDataSelected]="rowDataSelected"
-            [indexSelected]="indexSelected" [previousStatus]="previousStatus" (confirmAdd)="confirmAdd($event)"
-            (confirmUpdate)="onConfirmUpdate($event)" (confirmCancel)="onConfirmCancel($event)"></v-task-work>
+    <v-task-work *ngIf="displayDialogAddTodo" [mode]="mode" [rowDataSelected]="rowDataSelected"
+        [indexSelected]="indexSelected" [previousStatus]="previousStatus" (confirmAdd)="confirmAdd($event)"
+        (confirmUpdate)="onConfirmUpdate($event)" (confirmCancel)="onConfirmCancel($event)"></v-task-work>
 
 </p-dialog>
 

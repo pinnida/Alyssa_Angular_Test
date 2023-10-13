@@ -1,7 +1,14 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+
+// dayjs
 import * as dayjs from 'dayjs';
-import { IInput } from '../fe-home/fe-home.component';
+
+// models interface
+import { ICategoryOptions, IInput, IPriorityOptions, IStatusOptions } from 'src/assets/data/interface.model';
+
+// data
+import { CategoryOptions, PriorityOptions, StatusOptions } from 'src/assets/data/dropdown.data';
 
 @Component({
   selector: 'v-task-work',
@@ -10,9 +17,9 @@ import { IInput } from '../fe-home/fe-home.component';
 })
 export class VTaskWorkComponent {
   @Input() mode!: string;
-  @Input() rowDataSelected: any | null;
-  @Input() indexSelected!: any | null;
-  @Input() previousStatus!: any | null;
+  @Input() rowDataSelected!: IInput | null;
+  @Input() indexSelected!: number | null;
+  @Input() previousStatus!: string | null;
 
   @Output() confirmAdd: EventEmitter<any> = new EventEmitter();
   @Output() confirmUpdate: EventEmitter<any> = new EventEmitter();
@@ -20,25 +27,11 @@ export class VTaskWorkComponent {
 
   nowDate = dayjs().format('YYYY-MM-DD');
   myForm!: FormGroup;
-
-  PriorityOptions = [
-    { text: 'High', value: 'High' },
-    { text: 'Medium', value: 'Medium' },
-    { text: 'Low', value: 'Low' },
-  ];
-
-  CategoryOptions = [
-    { text: 'Work', value: 'Work', icon: 'bi bi-laptop' },
-    { text: 'Personal', value: 'Personal', icon: 'bi bi-person' },
-    { text: 'Study', value: 'Study', icon: 'bi bi-backpack' },
-  ];
-
-  StatusOptions = [
-    { text: 'Todo', value: 'Todo' },
-    { text: 'InProgress', value: 'InProgress' },
-    { text: 'Done', value: 'Done' },
-  ];
-
+  DDL = {
+    PriorityOptions: PriorityOptions as Array<IPriorityOptions>,
+    CategoryOptions: CategoryOptions as Array<ICategoryOptions>,
+    StatusOptions: StatusOptions as Array<IStatusOptions>,
+  };
 
   constructor(
     private fb: NonNullableFormBuilder
@@ -66,6 +59,11 @@ export class VTaskWorkComponent {
 
   ngOnInit(): void {
     this.createForm();
+
+    // Dropdowns
+    this.DDL.PriorityOptions = PriorityOptions;
+    this.DDL.CategoryOptions = CategoryOptions;
+    this.DDL.StatusOptions = StatusOptions;
 
     if (this.rowDataSelected) {
       this.myForm.get('title')?.setValue(this.rowDataSelected.title);
