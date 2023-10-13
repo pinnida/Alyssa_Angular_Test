@@ -5,9 +5,9 @@
 2. npm install
 3. ng serve --o
 
-# Username && Password for Login
-Web: https://angular-signin-test-1e08d.firebaseapp.com/
-Username: test1234@mail.com
-Password: test1234
+# Account for Login
+# Web: https://angular-signin-test-1e08d.firebaseapp.com/
+# Username: test1234@mail.com
+# Password: test1234
 
 
